@@ -1,0 +1,499 @@
+class ListNode {
+    int val; 
+    ListNode next; 
+
+    
+    ListNode(int val) {
+        this.val = val;
+        this.next = null; 
+    }
+}
+
+public class SingleLinked {
+
+ListNode head; 
+public SingleLinked () {
+        this.head = null;
+    }
+
+
+
+
+
+public void deleteFront() {
+        if (head != null) {
+            head = head.next; 
+        }
+    }
+
+
+
+
+public void deleteEnd() {
+        if (head == null) return;
+        if (head.next == null) { 
+            head = null;
+            return;
+        }
+        ListNode current = head;
+        while (current.next.next != null) {
+            current = current.next;
+        }
+        current.next = null; 
+    }
+
+
+ public void deleteBefore(int targetVal) {
+        if (head == null || head.next == null) return;
+        if (head.next.val == targetVal) {
+            head = head.next; 
+            return;
+        }
+        ListNode prev = null, current = head;
+        while (current.next != null && current.next.val != targetVal) {
+            prev = current;
+            current = current.next;
+        }
+        if (current.next != null) {
+            prev.next = current.next; 
+        }
+    }
+
+
+
+
+public void deleteAfter(int targetVal) {
+        ListNode current = head;
+        while (current != null && current.val != targetVal) {
+            current = current.next;
+        }
+        if (current != null && current.next != null) {
+            current.next = current.next.next; 
+        }
+    }
+
+
+
+
+public void selectionSort() {
+        if (head == null) return;
+        ListNode current = head;
+        while (current != null) {
+            ListNode min = current;
+            ListNode r = current.next;
+            while (r != null) {
+                if (r.val < min.val) {
+                    min = r;
+                }
+                r = r.next;
+            }
+            int temp = current.val;
+            current.val = min.val;
+            min.val = temp;
+            current = current.next;
+        }
+    }
+
+
+public void printList() {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + "->"); 
+            current = current.next; 
+        }
+        System.out.println("NULL"); 
+    }
+
+
+
+
+public static void main (String [] args) {
+
+SingleLinked  list = new SingleLinked () ;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+////// double 
+
+
+class DoubleMake {
+    int value;
+    DoubleMake next;
+    DoubleMake prev;
+
+    DoubleMake(int value) {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+
+
+public class doubleLinkedList {
+
+    DoubleMake head;
+    DoubleMake tail;
+
+    doubleLinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    public static void main(String[] args) {
+        doubleLinkedList list = new doubleLinkedList();
+
+        // Adding nodes to the list
+        list.head = new DoubleMake(2);
+        list.head.next = new DoubleMake(3);
+        list.head.next.prev = list.head;
+        list.head.next.next = new DoubleMake(4);
+        list.head.next.next.prev = list.head.next;
+        list.head.next.next.next = new DoubleMake(5);
+        list.head.next.next.next.prev = list.head.next.next;
+
+        list.tail = list.head.next.next.next;
+
+        System.out.println("Original List:");
+        list.printDouble(list.head);
+        System.out.println();
+        list.printReverse(list.tail);
+        System.out.println();
+
+        list.addFront(7);
+        list.addFront(8);
+        list.addEnd(9);
+        list.addEnd(10);
+        list.addAfter(4, 6);
+        list.addBefore(6, 5);
+
+        System.out.println("List after additions:");
+        list.printDouble(list.head);
+        System.out.println();
+
+        list.deleteFront();
+        list.deleteEnd();
+        list.deleteNode(4);
+
+        System.out.println("List after deletions:");
+        list.printDouble(list.head);
+        System.out.println();
+
+        System.out.println("Count of nodes: " + list.countNodes());
+
+        list.rotateList();
+
+        System.out.println("List after rotation:");
+        list.printDouble(list.head);
+    }
+
+    
+    public void printDouble(DoubleMake head) {
+        DoubleMake current = head;
+        while (current != null) {
+            System.out.print(current.value + "<=>");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+ 
+    public void printReverse(DoubleMake tail) {
+        DoubleMake current = tail;
+        while (current != null) {
+            System.out.print(current.value + "<=>");
+            current = current.prev;
+        }
+        System.out.println("null");
+    }
+
+ 
+    public void addFront(int value) {
+        DoubleMake newNode = new DoubleMake(value);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
+    }
+
+    public void addEnd(int value) {
+        DoubleMake newNode = new DoubleMake(value);
+        if (tail == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+        }
+    }
+
+   
+    public void addAfter(int afterValue, int value) {
+        DoubleMake current = head;
+        while (current != null && current.value != afterValue) {
+            current = current.next;
+        }
+        if (current != null) {
+            DoubleMake newNode = new DoubleMake(value);
+            newNode.next = current.next;
+            newNode.prev = current;
+            if (current.next != null) {
+                current.next.prev = newNode;
+            }
+            current.next = newNode;
+            if (current == tail) {
+                tail = newNode;
+            }
+        }
+    }
+
+    
+    public void addBefore(int beforeValue, int value) {
+        DoubleMake current = head;
+        while (current != null && current.value != beforeValue) {
+            current = current.next;
+        }
+        if (current != null) {
+            DoubleMake newNode = new DoubleMake(value);
+            newNode.next = current;
+            newNode.prev = current.prev;
+            if (current.prev != null) {
+                current.prev.next = newNode;
+            } else {
+                head = newNode;
+            }
+            current.prev = newNode;
+        }
+    }
+
+    
+    public void deleteFront() {
+        if (head != null) {
+            head = head
+            .next;
+            if (head != null) {
+                head.prev = null;
+            } else {
+                tail = null;
+            }
+        }
+    }
+
+ 
+    public void deleteEnd() {
+        if (tail != null) {
+            tail = tail.prev;
+            if (tail != null) {
+                tail.next = null;
+            } else {
+                head = null;
+            }
+        }
+    }
+
+    
+    public void deleteNode(int value) {
+        DoubleMake current = head;
+        while (current != null && current.value != value) {
+            current = current.next;
+        }
+        if (current != null) {
+            if (current.prev != null) {
+                current.prev.next = current.next;
+            } else {
+                head = current.next;
+            }
+            if (current.next != null) {
+                current.next.prev = current.prev;
+            } else {
+                tail = current.prev;
+            }
+        }
+    }
+
+
+    public int countNodes() {
+        int count = 0;
+        DoubleMake current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+   
+    public void rotateList() {
+        if (head == null || head.next == null) return;
+
+        DoubleMake current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = head;
+        head.prev = current;
+        head = head.next;
+        head.prev.next = null;
+        head.prev = null;
+    }
+}
+
+
+
+
+
+
+/////stack
+
+
+
+class Stack {
+    private int maxSize;
+    private int[] stackArray;
+    private int top;
+
+    public Stack(int size) {
+
+        maxSize = size;
+        stackArray = new int[maxSize];
+        top = -1;
+
+    }
+
+    // check is empty
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    // check is full
+
+    public boolean isFull() {
+        return top == maxSize - 1;
+
+    }
+
+   
+    public void push(int value) {
+        if (isFull() == true) {
+            System.out.println(" stack is full ");
+        } else {
+            stackArray[++top] = value;
+            System.out.println("pushed " + value + "   to the stack");
+
+        }
+
+    }
+
+
+    public int pop() {
+
+        if (isEmpty() == true) {
+            System.out.println(" stack is empty Cannot pop");
+            return -1;
+
+        }
+
+        else {
+            return stackArray[top--];
+        }
+
+    }
+
+    public void printStack() {
+        System.out.print("Stack Elements:");
+        for (int i = 0; i <= top; i++) {
+            System.out.print(stackArray[i] + " ");
+        }
+        System.out.println();
+    }
+
+
+
+
+   // peek element 
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Cannot peek.");
+            return -1;
+        } else {
+            return stackArray[top];
+        }
+    }
+    // sort Stack
+    public void sortStack() {
+        Stack tempStack = new Stack(maxSize);
+        while (!isEmpty()) {
+            int current = pop();
+            while (!tempStack.isEmpty() && tempStack.peek() > current) {
+                push(tempStack.pop());
+            }
+            tempStack.push(current);
+        }
+        // Transfer sorted elements back to the original stack
+        while (!tempStack.isEmpty()) {
+            push(tempStack.pop());
+        }
+    }
+
+
+    //check palindrome 
+
+    public boolean isPalindrome() {
+        Stack tempStack = new Stack(maxSize) ;
+        int [] tempArray = new int [top +1] ; 
+
+        for (int i = 0 ; i <= top ; i++)  {
+            int value = stackArray[i] ; 
+
+                tempArray[i] = value ; 
+                tempStack.push(value);
+
+        }
+
+        for (int i = 0 ; i<=top ; i++){
+            if (tempArray[i] != tempStack.pop()) {
+                return false ; 
+
+            }              
+
+        }
+        return true ;
+
+    }
+
+}
+
+ 
+
+
+class stackExample {
+
+    public static void main(String[] args) {
+
+        Stack stack1 = new Stack(7);
+
+       
+    }
+
+}
+
+
+
