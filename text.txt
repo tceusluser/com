@@ -497,3 +497,132 @@ class stackExample {
 
 
 
+import java.util.Scanner;
+
+public class firstarray {
+public static void main (String []args ) {
+	
+	System.out.println("(a) . Get the inputs from the user ") ;
+	
+	
+	int[] MyFirstArray = new int[10]; 
+
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Enter number " + (i + 1) + ": ");
+            MyFirstArray [i] = scanner.nextInt();
+	
+		}
+		
+	System.out.println () ;
+		System.out.println () ;
+	System.out.println ("(b) . Printing the arrays ") ;
+
+	
+	for (int i = 0 ; i<10 ; i++) {
+		
+		System.out.println (i+1 +"  : Number is " + MyFirstArray[i]);
+	}
+	
+			
+		System.out.println ("(c) . get the number and check if it is exist   ") ;
+
+  
+     System.out.print ("Input a number to chech : ") ;
+              int inpunum = scanner.nextInt() ;
+			  String name; 
+		for ( int i= 0 ; i<10 ; i++) {
+			if (MyFirstArray[i] == inpunum) {
+				name = i + "yes it has the number " ;
+				
+				
+			}
+			
+			else {
+								 name = i + "no it has not the number " ;
+
+				
+				
+			}
+			
+			System.out.println (name ) ; 
+			
+		}
+		
+				
+	    System.out.println(" (d) .  Sort the array’s numbers in ascending order using insertion sorting method ") ; 
+	
+		for (int st = 1; st < MyFirstArray.length; st++) {
+            int key = MyFirstArray[st];
+            int j = st - 1;
+
+            
+            while (j >= 0 && key < MyFirstArray[j]) {
+                MyFirstArray[j + 1] = MyFirstArray[j];
+                j--;
+            }
+
+           
+            MyFirstArray[j + 1] = key;
+           }
+		   
+		   		System.out.println ("Sorted array is ");
+
+		for (int i = 0 ; i<10 ; i++) {
+		
+	
+		System.out.println ( i+1 +"  : Number is " + MyFirstArray[i]);
+}
+
+	    System.out.println(" (e) .  reverse the array ") ; 
+
+
+int st = 0;
+        int end = MyFirstArray.length - 1;
+
+        while (st < end) {
+           
+            int temp = MyFirstArray[st];
+            MyFirstArray[st] = MyFirstArray[end];
+            MyFirstArray[end] = temp;
+
+            
+            st++;
+            end--;
+        }
+		
+		for (int i = 0 ; i<10 ; i++) {
+		
+	
+		System.out.println ( i+1 +"  : Number is " + MyFirstArray[i]);
+
+
+
+
+}
+}}
+		    
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
