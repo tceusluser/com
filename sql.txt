@@ -44,6 +44,12 @@ ALTER TABLE Orde
     -> FOREIGN KEY (custno)
     -> REFERENCES customer(custno);
 	
+
+// DELETE FOREIGN 
+
+ALTER TABLE orders
+DROP FOREIGN KEY fk_customer_id;
+
 	
 	
 	
@@ -101,18 +107,32 @@ where condition ;
 	
 	
 	
+	insert into table_name values 
+(       ),
+(       ),
+(      ),
+(       ),
+(      );
+	
+	
+//change column name 	
+	ALTER TABLE table_name
+CHANGE old_column_name new_column_name data_type;
+
 	
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
+	//delete primRY
+
+ALTER TABLE table_name
+DROP PRIMARY KEY;
+
+
+
+
 	
 	
 	
