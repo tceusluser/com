@@ -1,0 +1,120 @@
+i. How can you list the databases in MySQL.
+
+	show databases;
+
+ii. How do you check the version of MySQL?
+
+	select VERSION();
+	
+iii. How can you cancel a command that you are in the process of entering in MySQL
+console?
+
+	ctrl+c
+	
+iv. What is the function to return the current user name in MySQL?
+
+	select USER() ;
+
+	ascending order (asc)
+
+viii. What is the function to get the current date?
+
+	select CURDATE();
+
+
+	
+x. What SQL statement is used to insert a new data in a database?
+
+	INSERT INTO table_name values (........);
+
+
+
+
+
+//primary key
+
+ALTER TABLE Customer
+    -> ADD PRIMARY KEY (custno);
+	
+	
+
+//add foreign key 
+ALTER TABLE Orde
+    -> ADD CONSTRAINT fk_orde_customer
+    -> FOREIGN KEY (custno)
+    -> REFERENCES customer(custno);
+	
+	
+	
+	
+	ALTER TABLE Shipment
+    -> ADD CONSTRAINT fk_shipment_orde
+    -> FOREIGN KEY (orderno)
+    -> REFERENCES Orde(orderno),
+    -> ADD CONSTRAINT fk_shipment_warehouse
+    -> FOREIGN KEY (warehouseno)
+    -> REFERENCES Warehouse(warehouseno);
+	
+	
+	
+	
+	 DESCRIBE ORDE_ITEM;
+	
+	
+	
+	
+	SELECT* FROM CUSTOMER WHERE CITY = 'BATTICALOA';
+	
+	
+	
+	
+
+ SELECT DISTINCT c.cname
+    -> FROM Customer c
+    -> JOIN Orde o ON c.custno = o.custno
+    -> WHERE o.ord_amt > 50000;
+	
+	
+SELECT *
+    -> FROM Orde o
+    -> JOIN Shipment s ON o.orderno = s.orderno
+    -> WHERE o.odate <= s.ship_date;	
+	
+	
+
+//clone table
+create table neworde as select* from orde;	
+	
+
+
+//update table
+
+update table_name 
+set column1='new_value'
+where condition ;	
+	
+	
+	mysqldump -u your_username -p orderproc_db > orderproc_db.sql
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
