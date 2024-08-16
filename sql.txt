@@ -133,6 +133,621 @@ DROP PRIMARY KEY;
 
 
 
+
+
+////////////	createing database////////////
+
+
+
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.2.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database orderproc_db;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use orderproc_db;
+Database changed
+mysql> CREATE TABLE orde (
+    ->     orderno INT,
+    ->     odate DATE,
+    ->     custno INT,
+    ->     ord_amt INT
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql> INSERT INTO orde (orderno, odate, custno, ord_amt) VALUES
+    ->     (2001, '2015-01-12', 1001, 6000),
+    ->     (2002, '2015-01-12', 1002, 8000),
+    ->     (2003, '2015-02-02', 1003, 9000),
+    ->     (2004, '2015-02-20', 1004, 10000),
+    ->     (2005, '2015-03-11', 1005, 11200),
+    ->     (2006, '2015-03-11', 1005, 20000),
+    ->     (2007, '2015-04-09', 1002, 100000),
+    ->     (2008, '2015-12-30', 1006, 80000),
+    ->     (2009, '2015-11-29', 1007, 70000),
+    ->     (2010, '2015-08-05', 1008, 10000);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql>  CREATE TABLE customer (
+    ->     custno INT,
+    ->     cname VARCHAR(255),
+    ->     city VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> INSERT INTO customer (custno, cname, city) VALUES
+    ->     (1001, 'Ramanan', 'Jaffna'),
+    ->     (1002, 'Sefra', 'Batticaloa'),
+    ->     (1003, 'Thanusiya', 'Batticaloa'),
+    ->     (1004, 'Kdhika', 'Kalmunai'),
+    ->     (1005, 'Ismath', 'Ampara'),
+    ->     (1006, 'Sriwathsan', 'Colombo'),
+    ->     (1007, 'Satheesh', 'Trincomalee'),
+    ->     (1008, 'Muhundhan', 'Colombo'),
+    ->     (1009, 'Balashankar', 'Kandy'),
+    ->     (1010, 'Gowsala', 'Jaffna');
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> CREATE TABLE item (
+    ->     itemno INT,
+    ->     unit_price DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+
+mysql> INSERT INTO item (itemno, unit_price) VALUES
+    ->     (11, 110.00),
+    ->     (22, 200.00),
+    ->     (33, 300.00),
+    ->     (44, 400.00),
+    ->     (55, 500.00);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql>
+mysql> CREATE TABLE orde_item (
+    ->     orderno INT,
+    ->     itemno INT,
+    ->     qty INT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO orde_item (orderno, itemno, qty) VALUES
+    ->     (2001, 11, 3),
+    ->     (2002, 11, 2),
+    ->     (2003, 22, 5),
+    ->     (2004, 33, 6),
+    ->     (2005, 44, 2),
+    ->     (2006, 55, 1),
+    ->     (2007, 44, 2),
+    ->     (2008, 11, 4),
+    ->     (2009, 33, 1),
+    ->     (2010, 55, 3);
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE shipment (
+    ->     orderno INT,
+    ->     warehouseno INT,
+    ->     ship_date DATE
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql> INSERT INTO shipment (orderno, warehouseno, ship_date) VALUES
+    ->     (2001, 1, '2015-01-13'),
+    ->     (2002, 1, '2015-01-14'),
+    ->     (2003, 2, '2015-02-04'),
+    ->     (2004, 3, '2015-02-22'),
+    ->     (2005, 4, '2015-03-14'),
+    ->     (2006, 4, '2015-03-15'),
+    ->     (2007, 5, '2015-04-11'),
+    ->     (2008, 1, '2015-12-30'),
+    ->     (2009, 5, '2015-12-01'),
+    ->     (2010, 5, '2015-08-06');
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql> CREATE TABLE warehouse (
+    ->     warehouseno INT,
+    ->     city VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> INSERT INTO warehouse (warehouseno, city) VALUES
+    ->     (1, 'Colombo'),
+    ->     (2, 'Kandy'),
+    ->     (3, 'Kurunegale'),
+    ->     (4, 'Polonnaruwa'),
+    ->     (5, 'Colombo');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+mysql> show tables;
++------------------------+
+| Tables_in_orderproc_db |
++------------------------+
+| customer               |
+| item                   |
+| orde                   |
+| orde_item              |
+| shipment               |
+| warehouse              |
++------------------------+
+6 rows in set (0.00 sec)
+
+mysql> describe customer;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| custno | int          | YES  |     | NULL    |       |
+| cname  | varchar(255) | YES  |     | NULL    |       |
+| city   | varchar(255) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> describe item;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| itemno     | int           | YES  |     | NULL    |       |
+| unit_price | decimal(10,2) | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> describe orde;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| orderno | int  | YES  |     | NULL    |       |
+| odate   | date | YES  |     | NULL    |       |
+| custno  | int  | YES  |     | NULL    |       |
+| ord_amt | int  | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from orde;
++---------+------------+--------+---------+
+| orderno | odate      | custno | ord_amt |
++---------+------------+--------+---------+
+|    2001 | 2015-01-12 |   1001 |    6000 |
+|    2002 | 2015-01-12 |   1002 |    8000 |
+|    2003 | 2015-02-02 |   1003 |    9000 |
+|    2004 | 2015-02-20 |   1004 |   10000 |
+|    2005 | 2015-03-11 |   1005 |   11200 |
+|    2006 | 2015-03-11 |   1005 |   20000 |
+|    2007 | 2015-04-09 |   1002 |  100000 |
+|    2008 | 2015-12-30 |   1006 |   80000 |
+|    2009 | 2015-11-29 |   1007 |   70000 |
+|    2010 | 2015-08-05 |   1008 |   10000 |
++---------+------------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Customer
+    -> ADD PRIMARY KEY (custno);
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Orde
+    -> ADD PRIMARY KEY (orderno);
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Item
+    -> ADD PRIMARY KEY (itemno);;
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+ERROR:
+No query specified
+
+mysql> ALTER TABLE Order_Item
+    -> ALTER TABLE Order_Item^C
+mysql> ALTER TABLE Orde_Item
+    -> ADD PRIMARY KEY (itemno,orderno);
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Warehouse
+    -> ADD PRIMARY KEY (warehouseno);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Shipment
+    -> ADD PRIMARY KEY (orderno, warehouseno);
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+
+mysql> ALTER TABLE Orde
+    -> ADD CONSTRAINT fk_orde_customer
+    -> FOREIGN KEY (custno)
+    -> REFERENCES customer(custno);
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> describe orde_item;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| orderno | int  | NO   | PRI | NULL    |       |
+| itemno  | int  | NO   | PRI | NULL    |       |
+| qty     | int  | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> ALTER TABLE Orde_Item
+    -> ADD CONSTRAINT fk_orde_item_orde
+    -> FOREIGN KEY (orderno)
+    -> REFERENCES Orde(orderno),
+    -> ADD CONSTRAINT fk_order_item_item
+    -> FOREIGN KEY (itemno)
+    -> REFERENCES Item(itemno);
+Query OK, 10 rows affected (0.05 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> ALTER TABLE Shipment
+    -> ADD CONSTRAINT fk_shipment_orde
+    -> FOREIGN KEY (orderno)
+    -> REFERENCES Orde(orderno),
+    -> ADD CONSTRAINT fk_shipment_warehouse
+    -> FOREIGN KEY (warehouseno)
+    -> REFERENCES Warehouse(warehouseno);
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql> DESCRIBE CUSTOMER;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| custno | int          | NO   | PRI | NULL    |       |
+| cname  | varchar(255) | YES  |     | NULL    |       |
+| city   | varchar(255) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> DESCRIBE ORDE  ;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| orderno | int  | NO   | PRI | NULL    |       |
+| odate   | date | YES  |     | NULL    |       |
+| custno  | int  | YES  | MUL | NULL    |       |
+| ord_amt | int  | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> DESCRIBE ITEM  ;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| itemno     | int           | NO   | PRI | NULL    |       |
+| unit_price | decimal(10,2) | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE ORDE_ITEM;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| orderno | int  | NO   | PRI | NULL    |       |
+| itemno  | int  | NO   | PRI | NULL    |       |
+| qty     | int  | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> DESCRIBE WAREHOUSE ;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| warehouseno | int          | NO   | PRI | NULL    |       |
+| city        | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT* FROM CUSTOMER WHERE CITY = BATTICALOA;
+ERROR 1054 (42S22): Unknown column 'BATTICALOA' in 'where clause'
+mysql> SELECT* FROM CUSTOMER WHERE CITY = 'BATTICALOA';
++--------+-----------+------------+
+| custno | cname     | city       |
++--------+-----------+------------+
+|   1002 | Sefra     | Batticaloa |
+|   1003 | Thanusiya | Batticaloa |
++--------+-----------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT c.*
+    -> FROM Customer c
+    -> JOIN Warehouse w ON c.city = w.city
+    -> WHERE w.city = 'Batticaloa';
+Empty set (0.01 sec)
+
+mysql> SELECT c.*
+    -> FROM Customer c
+    -> JOIN Warehouse w ON c.city = w.city
+    -> WHERE w.city = 'batticaloa';
+Empty set (0.00 sec)
+
+mysql> SELECT* FROM CUSTOMER WHERE CITY = 'BATTICALOA' or 'jaffna';
++--------+-----------+------------+
+| custno | cname     | city       |
++--------+-----------+------------+
+|   1002 | Sefra     | Batticaloa |
+|   1003 | Thanusiya | Batticaloa |
++--------+-----------+------------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> SELECT* FROM CUSTOMER WHERE CITY = 'BATTICALOA' or city= 'jaffna';
++--------+-----------+------------+
+| custno | cname     | city       |
++--------+-----------+------------+
+|   1001 | Ramanan   | Jaffna     |
+|   1002 | Sefra     | Batticaloa |
+|   1003 | Thanusiya | Batticaloa |
+|   1010 | Gowsala   | Jaffna     |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*)
+    -> FROM Customer
+    -> WHERE city = 'Colombo';
++----------+
+| COUNT(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Customer
+    -> WHERE cname LIKE '%na';
+Empty set (0.00 sec)
+
+mysql> select* from orde
+    -> where ord_amt > 5000;
++---------+------------+--------+---------+
+| orderno | odate      | custno | ord_amt |
++---------+------------+--------+---------+
+|    2001 | 2015-01-12 |   1001 |    6000 |
+|    2002 | 2015-01-12 |   1002 |    8000 |
+|    2003 | 2015-02-02 |   1003 |    9000 |
+|    2004 | 2015-02-20 |   1004 |   10000 |
+|    2005 | 2015-03-11 |   1005 |   11200 |
+|    2006 | 2015-03-11 |   1005 |   20000 |
+|    2007 | 2015-04-09 |   1002 |  100000 |
+|    2008 | 2015-12-30 |   1006 |   80000 |
+|    2009 | 2015-11-29 |   1007 |   70000 |
+|    2010 | 2015-08-05 |   1008 |   10000 |
++---------+------------+--------+---------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT c.cname
+    -> FROM Customer c
+    -> JOIN Orde o ON c.custno = o.custno
+    -> WHERE o.ord_amt > 50000;
++------------+
+| cname      |
++------------+
+| Sefra      |
+| Sriwathsan |
+| Satheesh   |
++------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT c.cname
+    -> FROM Customer c
+    -> JOIN Warehouse w ON c.city = w.city;
++-------------+
+| cname       |
++-------------+
+| Sriwathsan  |
+| Muhundhan   |
+| Balashankar |
++-------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(DISTINCT city) AS num_cities
+    -> FROM Customer;
++------------+
+| num_cities |
++------------+
+|          7 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS num_warehouses_in_colombo
+    -> FROM Warehouse
+    -> WHERE city = 'Colombo';
++---------------------------+
+| num_warehouses_in_colombo |
++---------------------------+
+|                         2 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Orde o
+    -> JOIN Shipment s ON o.orderno = s.orderno
+    -> WHERE o.odate <= s.ship_date;
++---------+------------+--------+---------+---------+-------------+------------+
+| orderno | odate      | custno | ord_amt | orderno | warehouseno | ship_date  |
++---------+------------+--------+---------+---------+-------------+------------+
+|    2001 | 2015-01-12 |   1001 |    6000 |    2001 |           1 | 2015-01-13 |
+|    2002 | 2015-01-12 |   1002 |    8000 |    2002 |           1 | 2015-01-14 |
+|    2003 | 2015-02-02 |   1003 |    9000 |    2003 |           2 | 2015-02-04 |
+|    2004 | 2015-02-20 |   1004 |   10000 |    2004 |           3 | 2015-02-22 |
+|    2005 | 2015-03-11 |   1005 |   11200 |    2005 |           4 | 2015-03-14 |
+|    2006 | 2015-03-11 |   1005 |   20000 |    2006 |           4 | 2015-03-15 |
+|    2007 | 2015-04-09 |   1002 |  100000 |    2007 |           5 | 2015-04-11 |
+|    2008 | 2015-12-30 |   1006 |   80000 |    2008 |           1 | 2015-12-30 |
+|    2009 | 2015-11-29 |   1007 |   70000 |    2009 |           5 | 2015-12-01 |
+|    2010 | 2015-08-05 |   1008 |   10000 |    2010 |           5 | 2015-08-06 |
++---------+------------+--------+---------+---------+-------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT o.orderno, o.odate, o.custno, o.ord_amt
+    -> FROM Orde o
+    -> JOIN Shipment s ON o.orderno = s.orderno
+    -> JOIN Warehouse w ON s.warehouseno = w.warehouseno
+    -> WHERE w.city = 'Colombo';
++---------+------------+--------+---------+
+| orderno | odate      | custno | ord_amt |
++---------+------------+--------+---------+
+|    2001 | 2015-01-12 |   1001 |    6000 |
+|    2002 | 2015-01-12 |   1002 |    8000 |
+|    2008 | 2015-12-30 |   1006 |   80000 |
+|    2007 | 2015-04-09 |   1002 |  100000 |
+|    2009 | 2015-11-29 |   1007 |   70000 |
+|    2010 | 2015-08-05 |   1008 |   10000 |
++---------+------------+--------+---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT c.cname AS customer_name, COUNT(o.orderno) AS total_orders, AVG(o.ord_amt) AS average_order_amount
+    -> FROM Customer c
+    -> JOIN Orde o ON c.custno = o.custno
+    -> GROUP BY c.custno, c.cname;
++---------------+--------------+----------------------+
+| customer_name | total_orders | average_order_amount |
++---------------+--------------+----------------------+
+| Ramanan       |            1 |            6000.0000 |
+| Sefra         |            2 |           54000.0000 |
+| Thanusiya     |            1 |            9000.0000 |
+| Kdhika        |            1 |           10000.0000 |
+| Ismath        |            2 |           15600.0000 |
+| Sriwathsan    |            1 |           80000.0000 |
+| Satheesh      |            1 |           70000.0000 |
+| Muhundhan     |            1 |           10000.0000 |
++---------------+--------------+----------------------+
+8 rows in set (0.01 sec)
+
+mysql> UPDATE Item
+    -> SET unit_price = 250
+    -> WHERE itemno = 22;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> create table neworde as select* from orde;
+Query OK, 10 rows affected (0.58 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> drop table orde;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> show tables;
++------------------------+
+| Tables_in_orderproc_db |
++------------------------+
+| customer               |
+| item                   |
+| neworde                |
+| orde_item              |
+| shipment               |
+| warehouse              |
++------------------------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> INSERT INTO order (orderno, odate, custno, ord_amt) VALUES
+    ->     (2001, '2015-01-12', 1001, 6000),
+    ->     (2002, '2015-01-12', 1002, 8000),
+    ->     (2003, '2015-02-02', 1003, 9000),
+    ->     (2004, '2015-02-20', 1004, 10000),
+    ->     (2005, '2015-03-11', 1005, 11200),
+    ->     (2006, '2015-03-11', 1005, 20000),
+    ->     (2007, '2015-04-09', 1002, 100000),
+    ->     (2008, '2015-12-30', 1006, 80000),
+    ->     (2009, '2015-11-29', 1007, 70000),
+    ->     (2010, '2015-08-05', 1008, 10000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order (orderno, odate, custno, ord_amt) VALUES
+    (2001, '2015-01-12', 1001, 60' at line 1
+mysql> mysqldump -u your_username -p orderproc_db > orderproc_db.sql
+    -> mysqldump -u root -p orderproc_db > orderproc_db.sql
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysqldump -u your_username -p orderproc_db > orderproc_db.sql
+mysqldump -u root ' at line 1
+mysql>
+
+
+
+
+////////// the error because the word "order"  is a reserved word in mysql version 
+so we cant use it /////////////
+
+
+
+
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
 	
 	
 	
